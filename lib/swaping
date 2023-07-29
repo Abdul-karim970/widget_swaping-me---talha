@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Flutter Demo',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home: const MyHomePage(title: 'Flutter Demo Home Page'),
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox.shrink();
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late List<Widget> widgetList;
+
+  @override
+  void initState() {
+    super.initState();
+    widgetList = [
+      const MyStateFull(
+        color: Colors.black,
+      ),
+      const MyStateFull(
+        color: Colors.red,
+      ),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: widgetList,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        isExtended: true,
+        onPressed: () {
+          setState(() {
+            widgetList.insert(0, widgetList.removeAt(1));
+          });
+        },
+      ),
+    );
+  }
+}
+
+class MyStateFull extends StatefulWidget {
+  const MyStateFull({super.key, required this.color});
+  final Color color;
+
+  @override
+  State<MyStateFull> createState() => _MyStateFullState();
+}
+
+class _MyStateFullState extends State<MyStateFull> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      color: widget.color,
+    );
+  }
+}
